@@ -3,7 +3,6 @@ package bowling.model;
 import bowling.exception.NameLengthException;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class Player {
 
@@ -18,9 +17,6 @@ public class Player {
     static Player of(String userName) {
         if (MIN_LENGTH_OF_PLAYER_NAME < userName.length()) {
             throw new NameLengthException(userName);
-        }
-        if (!Pattern.matches("^[a-zA-Z]*$", userName)) {
-            throw new IllegalArgumentException();
         }
         return new Player(userName);
     }
