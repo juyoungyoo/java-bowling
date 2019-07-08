@@ -17,23 +17,21 @@
 1단계 목표는 점수 계산을 제외한 볼링 게임 점수판을 구현하는 것이다.
 
 2. 각 프레임이 스트라이크이면 "X", 스페어이면 "9 | /", 미스이면 "8 | 1", 과 같이 출력하도록 구현한다.
-- 스트라이크(strike) : 프레임의 첫번째 투구에서 모든 핀(10개)을 쓰러트린 상태
-- 스페어(spare) : 프레임의 두번재 투구에서 모든 핀(10개)을 쓰러트린 상태
-- 미스(miss) : 프레임의 두번재 투구에서도 모든 핀이 쓰러지지 않은 상태
+round 1
+- 스트라이크(strike) : 프레임의 첫번째 투구에서 모든 핀(10개)을 쓰러트린 상태  / none
+round 2   
+- 스페어(spare) : 프레임의 두번재 투구에서 모든 핀(10개)을 쓰러트린 상태      / first  
+- 미스(miss) : 프레임의 두번재 투구에서도 모든 핀이 쓰러지지 않은 상태        / first, second 
+
+round 당 
+- 치다(hit) : 핀을 쓰러트렸을 경우 
+    - strike 
+    - spare
+    - miss 
 - 거터(gutter) : 핀을 하나도 쓰러트리지 못한 상태. 거터는 "-"로 표시
+    - miss
+            
 10 프레임은 스트라이크이거나 스페어이면 한 번을 더 투구할 수 있다.
-
-Pin
-
-strike X      :  1/ 10
-spare  /      :  / 10
-miss   index  :  / index
-gutter -      :  / 0
-
-"볼링 점수 계산법"
-Frame
-
-first, second
 
 ```
 플레이어 이름은(3 english letters)?: PJS
@@ -65,14 +63,35 @@ first, second
 1. 플레이어의 이름을 입력받는다. (in: string)
 - [x] (exception) 플레이어의 이름이 3글자 초과할 시 예외 처리 
  
-2. 볼링게임을 시작한다.
-2-0. 10개의 프레임을 생성한다.
+2. 볼링게임을 시작한다.      
+2-0. 10개의 프레임을 생성한다.        
+- [ ] 프레임은 2번의 핀을 칠 기회가 있다. (round 2)
+- [ ] 마지막 프레임은 라운드 3개를 갖는다. + round
+
 - [ ] 프레임은 최대 2번의 라운드를 갖는다. (0 - 9)
-- [ ] 마지막 프레임은 최대 3번의 라운드를 갖는다. (10)
 - [ ] 10frame 에서 2번째 라운드까지 10 모두 처리 시 한번의 기회가 더 주어진다.
  
 2-1.한 프레임 볼링을 친다.
-- [ ] Bowling (in: pin count, out: Result)
+- [ ] Bowling (in: pin count, out: FrameResult)
+2-2. 현 프레임의 결과를 반환한다.
+- [ ] getState (in: frameIndex, out: Result)
+
+bowling (in: downPin, out: frameResult)
+
+
+-- 볼링을 친다 -->bowling(in: downPin, out: frameResult)
+-- frameResult -> 
+ - gutter : current frame
+ - hit  : current frame
+ 
+ - strike : move frame
+ - miss : move frame
+ - spare : move frame 
+
+
+
+
+
 
 Bowling Pin (추후)
 
